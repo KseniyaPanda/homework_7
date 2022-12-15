@@ -6,3 +6,55 @@
 8 7,8 -7,1 9
 */
 
+// получить числа с консоли
+int GetNumber(string message)
+{
+   int result = 0;
+   while (true)
+   {
+      Console.WriteLine(message);
+      if (int.TryParse(Console.ReadLine(), out result))
+      {
+         break;
+      }
+      else
+      {
+         Console.WriteLine("Ввели не число");
+      }
+   }
+   return result;
+}
+
+// задать матрицу и заполнить ее числами
+double[,] GetMatrix(int m, int n)
+{
+   double[,] matrix = new double[m, n];
+   Random rnd = new Random();
+   for (int i = 0; i < matrix.GetLength(0); i++)
+   {
+      for (int j = 0; j < matrix.GetLength(1); j++)
+      {
+         matrix[i, j] = Math.Round(rnd.NextDouble() * rnd.Next(-10, 10), 1);
+      }
+   }
+   return matrix;
+}
+
+// распечатать матрицу
+void PrintMatrix(double[,] matrix)
+{
+   for (int i = 0; i < matrix.GetLength(0); i++)
+   {
+      for (int j = 0; j < matrix.GetLength(1); j++)
+      {
+         Console.Write($"{matrix[i, j]}   ");
+      }
+      Console.WriteLine();
+   }
+}
+
+int m = GetNumber("Введите количество строк");
+int n = GetNumber("Введите количество столбцов");
+
+double[,] matrix = GetMatrix(m, n);
+PrintMatrix(matrix);
